@@ -1,0 +1,20 @@
+[user]
+	email = coltorleichtman@gmail.com
+    name = Coltor Leichtman
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --line-numbers --paging=never
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+[pager]
+	status = true

@@ -1,0 +1,131 @@
+
+@define-color base           rgba(8, 8, 8, 1);
+@define-color urgent         #b02c36 ;
+@define-color primary_orange #fe9000 ;
+@define-color primary_yellow #ffdd4a ;
+@define-color primary_red    #da1b2b ;
+@define-color primary_blue   #afd2e9 ;
+@define-color primary_blue_2 #6fadd6 ;
+
+@keyframes blink-warning {
+    70% {
+        color: white;
+    }
+
+    to {
+        color: white;
+        background-color: orange;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: white;
+    }
+
+    to {
+        color: white;
+        background-color: red;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+
+/* Reset all styles */
+/* The whole bar */
+#waybar {
+    color: @primary_blue;
+    background-color: @base;
+    font-family: 'IBM Plex Sans', 'BlexMono Nerd Font';
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+#idle_inhibitor
+{
+    font-size: 16px;
+    padding-right: 14px;
+}
+
+#battery
+{
+    padding-right: 6px;
+}
+#pulseaudio,
+#tray,
+#memory,
+#cpu
+{
+    padding-right: 8px;
+}
+
+#backlight{
+    padding-right: 3px;
+    margin-right: 5px;
+}
+
+/* Every modules */
+#clock
+{
+    font-size:16px;
+    padding-left:2rem;
+    padding-right:2rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Modules styles
+ * -------------------------------------------------------------------------- */
+
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning
+#cpu.warning
+#memory.warning {
+    color: @primary_orange;
+}
+
+#battery.critical
+#cpu.critical
+#memory.critical {
+    color: @primary_red;
+}
+
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+
+#pulseaudio.muted {
+    color: @primary_yellow;
+}
+
+#window {
+    padding-left: 20px;
+}
+
+#workspaces button {
+    color: @primary_blue;
+}
+
+#workspaces button.active {
+    border-radius: 10px;
+    background: @primary_blue_2;
+    color: rgba(8, 8, 8, 0.82);
+}
+
+#workspaces button.urgent {
+    color: @primary_red;
+    border-color: @primary_red;
+}

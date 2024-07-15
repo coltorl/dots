@@ -1,0 +1,79 @@
+{
+    "margin-top": 0,
+        "margin-left": 3,
+        "margin-right": 3,
+        "layer": "top", // Waybar at top layer
+        "spacing": 4, // Gaps between modules (4px)
+        "modules-left": ["hyprland/workspaces", "hyprland/window"],
+        "modules-center": ["clock"],
+        "modules-right": ["tray", "pulseaudio", "backlight", "cpu", "memory", "battery", "idle_inhibitor"],
+        "hyprland/workspaces": {
+            "on-click": "activate",
+            "format": "{name}",
+            "format-icons": {
+                "default": ""
+            },
+        },
+        "cpu": {
+            "interval": 5,
+            "format": "  {usage}%", // Icon: microchip
+            "states": {
+                "warning": 70,
+                "critical": 90,
+            },
+            "on-click": "footclient --hold sh -c 'btm'",
+        },
+        "memory": {
+            "interval": 5,
+            "format": "   {}%", // Icon: memory
+            "on-click": "footclient --hold sh -c 'btm'",
+            "states": {
+                "warning": 70,
+                "critical": 90
+            }
+        },
+        "tray": {
+            "icon-size": 16,
+            "spacing": 12
+        },
+        "clock": {
+            "format":"{:%b %d %Y %H:%M %Z}",
+        },
+        "backlight": {
+            "format": "{icon}  {percent}%",
+            "format-icons": ["", "", "", "", "", "", "", "", ""]
+        },
+        "battery": {
+            "states": {
+                // "good": 95,
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{icon}    {capacity}%",
+            "format-charging": "   {capacity}%",
+            "format-plugged": "   {capacity}%",
+            "format-alt": "{icon}  {time}",
+            "format-icons": ["", "", "", "", ""]
+        },
+        "pulseaudio": {
+            // "scroll-step": 1, // %, can be a float
+            "format": "{icon}  {volume}%  {format_source}",
+            "format-muted": " {format_source}",
+            "format-source": " {volume}%",
+            "format-source-muted": "",
+            "format-icons": {
+                "headphone": "",
+                "headset": "",
+                "default": ["", "", ""]
+            },
+            "on-click": "pavucontrol"
+        },
+        "idle_inhibitor": {
+            "format": "{icon}",
+            "format-icons": {
+                "activated": "",
+                "deactivated": ""
+            }
+        }
+}
+
