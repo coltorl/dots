@@ -152,4 +152,21 @@ return {
             })
         end,
     },
+    {
+        "mikavilpas/yazi.nvim",
+        event = "VeryLazy",
+        keys = {
+            {
+                -- Open in the current working directory
+                "<leader>e",
+                function()
+                    require("yazi").yazi(nil, vim.fn.getcwd())
+                end,
+                desc = "Yazi",
+            },
+        },
+        opts = {
+            open_for_directories = true,
+        },
+    },
 }

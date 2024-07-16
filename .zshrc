@@ -25,6 +25,7 @@ alias fman="compgen -c | fzf | xargs man"
 alias ls="exa"
 alias lg="lazygit"
 alias config='/usr/bin/git --git-dir=$HOME/dots.git/ --work-tree=$HOME'
+alias viewconf='lazygit -g $HOME/dots.git -w $HOME'
 
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
