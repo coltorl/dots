@@ -49,6 +49,10 @@ return {
                 automatic_installation = true,
                 handlers = {},
             })
+            local dap = require("dap")
+            dap.defaults.fallback.exception_breakpoints = {}
+            dap.defaults.cpp.exception_breakpoints = {}
+            dap.defaults.c.exception_breakpoints = {}
             require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust", "c", "cpp" } })
         end,
     },

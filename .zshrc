@@ -13,6 +13,8 @@ export SAL_USE_VCLPLUGIN=gtk3
 
 export EDITOR='nvim'
 alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
 alias cat="bat"
 alias cd="z"
 alias fcd='cd $(fd --type d --hidden --exclude .npm --exclude .gnupg --exclude .local --exclude .thunderbird --exclude .rustup --exclude .git --exclude .cache --exclude .mozilla --exclude .config/discord --exclude .cargo | fzf)'

@@ -1,24 +1,5 @@
 return {
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        enabled = false,
-        opts = {
-            filesystem = {
-                bind_to_cwd = true,
-                filtered_items = {
-                    visible = false,
-                    show_hidden_count = true,
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
-                    hide_by_name = {
-                        ".git",
-                    },
-                    never_show = {},
-                },
-            },
-        },
-    },
-    {
         "rcarriga/nvim-dap-ui",
         keys = {
             {
@@ -36,6 +17,13 @@ return {
                 desc = "Eval",
                 mode = { "n", "v" },
             },
+            keys = {
+                "<leader>de",
+                function()
+                    require("dap").set_exception_breakpoints()
+                end,
+                desc = "Exceptions",
+            },
         },
         opts = {
             element_mappings = {
@@ -46,50 +34,9 @@ return {
             },
         },
         config = function(_, opts)
-            local dap = require("dap")
             local dapui = require("dapui")
             dapui.setup(opts)
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                vim.cmd.Neotree("close")
-                dapui.open({})
-            end
         end,
-    },
-    {
-        "akinsho/bufferline.nvim",
-        opts = {
-            highlights = {
-                separator = {
-                    fg = "#BDBDBD",
-                },
-            },
-            options = {
-                always_show_bufferline = true,
-                show_close_icon = false,
-                show_buffer_close_icons = false,
-                separator_style = "thick",
-                indicator = {
-                    style = "none",
-                },
-                offsets = {
-                    {
-                        filetype = "dapui_scopes",
-                    },
-                    {
-                        filetype = "Outline",
-                    },
-                    {
-                        filetype = "neo-tree",
-                    },
-                    {
-                        filetype = "trouble",
-                    },
-                    {
-                        filetype = "spectre_panel",
-                    }
-                },
-            },
-        },
     },
     {
         "petertriho/nvim-scrollbar",
