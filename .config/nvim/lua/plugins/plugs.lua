@@ -157,12 +157,19 @@ return {
         event = "VeryLazy",
         keys = {
             {
-                -- Open in the current working directory
                 "<leader>e",
+                function()
+                    require("yazi").yazi()
+                end,
+                desc = "Yazi",
+            },
+            {
+                -- Open in the current working directory
+                "<leader>E",
                 function()
                     require("yazi").yazi(nil, vim.fn.getcwd())
                 end,
-                desc = "Yazi",
+                desc = "Yazi (cwd)",
             },
         },
         opts = {

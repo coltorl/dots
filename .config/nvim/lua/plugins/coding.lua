@@ -97,7 +97,6 @@ return {
                 "clangd",
                 "json-lsp",
                 "lua-language-server",
-                "neocmakelsp",
                 "pyright",
                 "ruff-lsp",
                 "lemminx",
@@ -160,24 +159,6 @@ return {
                     return { "lsp", "indent" }
                 end,
             })
-        end,
-    },
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-        keys = {
-            {
-                "<leader>cp",
-                ft = "markdown",
-                "<cmd>MarkdownPreviewToggle<cr>",
-                desc = "Markdown Preview",
-            },
-        },
-        config = function()
-            vim.cmd([[do FileType]])
         end,
     },
     {
@@ -260,6 +241,60 @@ return {
                 end,
                 desc = "Extract Block to File",
                 mode = { "n" },
+            },
+        },
+    },
+    {
+        "emmanueltouzery/decisive.nvim",
+        config = function()
+            require("decisive").setup({})
+        end,
+        lazy = true,
+        ft = { "csv" },
+        keys = {
+            {
+                "<leader>cc",
+                function() end,
+                { silent = true },
+                desc = "CSV+",
+                mode = "n",
+            },
+
+            {
+                "<leader>cca",
+                function()
+                    require("decisive").align_csv({})
+                end,
+                { silent = true },
+                desc = "Align CSV",
+                mode = "n",
+            },
+            {
+                "<leader>ccA",
+                function()
+                    require("decisive").align_csv_clear({})
+                end,
+                { silent = true },
+                desc = "Align CSV clear",
+                mode = "n",
+            },
+            {
+                "[c",
+                function()
+                    require("decisive").align_csv_prev_col()
+                end,
+                { silent = true },
+                desc = "Align CSV prev col",
+                mode = "n",
+            },
+            {
+                "]c",
+                function()
+                    require("decisive").align_csv_next_col()
+                end,
+                { silent = true },
+                desc = "Align CSV next col",
+                mode = "n",
             },
         },
     },
