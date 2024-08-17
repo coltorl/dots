@@ -1,7 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="avit"
 ZVM_INIT_MODE=sourcing
-plugins=(git sudo zsh-vi-mode zsh-autocomplete zsh-syntax-highlighting)
+plugins=(git sudo zsh-vi-mode zsh-autocomplete zsh-syntax-highlighting ssh-agent)
+zstyle :omz:plugins:ssh-agent identities gatech
 source $ZSH/oh-my-zsh.sh
 
 export PATH=$HOME/.local/bin:$PATH
