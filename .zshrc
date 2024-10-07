@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="avit"
 ZVM_INIT_MODE=sourcing
-plugins=(git sudo zsh-vi-mode zsh-autocomplete zsh-syntax-highlighting ssh-agent)
+plugins=(git sudo zsh-vi-mode zsh-syntax-highlighting ssh-agent)
 zstyle :omz:plugins:ssh-agent identities gatech
 source $ZSH/oh-my-zsh.sh
 
@@ -26,7 +26,7 @@ alias c='clear'
 alias tree='exa -T'
 alias docker='podman'
 alias fman="compgen -c | fzf | xargs man"
-alias ls="exa"
+alias ls="exa -a"
 alias lg="lazygit"
 alias config='/usr/bin/git --git-dir=$HOME/dots.git/ --work-tree=$HOME'
 alias viewconf='lazygit -g $HOME/dots.git -w $HOME'
@@ -60,7 +60,7 @@ function onchange() {
 
 chpwd ()
 {
-    ls
+    exa
 }
 
 
@@ -71,6 +71,12 @@ eval "$(zoxide init zsh)"
 
 autoload -Uz compinit
 compinit
-export PATH="$PATH:/opt/mssql-tools18/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

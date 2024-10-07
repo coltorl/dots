@@ -86,6 +86,7 @@ return {
                 "latex",
                 "glsl",
                 "http",
+                "llvm"
             },
         },
     },
