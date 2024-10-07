@@ -9,6 +9,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export BAT_THEME=fly16
+export XCURSOR_SIZE=24
 
 export SAL_USE_VCLPLUGIN=gtk3
 
@@ -70,3 +71,6 @@ eval "$(zoxide init zsh)"
 
 autoload -Uz compinit
 compinit
+export PATH="$PATH:/opt/mssql-tools18/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

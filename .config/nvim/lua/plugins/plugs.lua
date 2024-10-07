@@ -56,7 +56,22 @@ return {
         },
     },
     {
-        "hrsh7th/nvim-cmp",
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({
+                check_ts = true,
+            })
+        end,
+    },
+    {
+        "echasnovski/mini.pairs",
+        enabled = false,
+    },
+    {
+        "iguanacucumber/magazine.nvim",
+        after = "nvim-autopairs",
+        name = "nvim-cmp", -- Otherwise highlighting gets messed up
         ---@param opts cmp.ConfigSchema
         opts = function(_, opts)
             local cmp = require("cmp")
@@ -68,19 +83,10 @@ return {
                 completion = cmp.config.window.bordered(win_opt),
                 documentation = cmp.config.window.bordered(win_opt),
             }
-            opts.window.completion.scrollbar = true
+            opts.window.completion.scrollbar = false
 
             opts.completion.completeopt = "menu,menuone,noselect"
             opts.completion.keyword_length = 1
-
-            opts.matching = {
-                disallow_fuzzy_matching = true,
-                disallow_fullfuzzy_matching = true,
-                disallow_partial_fuzzy_matching = true,
-                disallow_partial_matching = true,
-                disallow_prefix_unmatching = false,
-                disallow_symbol_nonprefix_matching = true,
-            }
 
             opts.mapping = vim.tbl_extend("force", opts.mapping, {
                 ["<Tab>"] = cmp.mapping(function(fallback)
@@ -99,6 +105,11 @@ return {
                 end, { "i", "s" }),
                 ["<CR>"] = cmp.mapping.confirm(),
             })
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+            return opts
         end,
     },
     {
@@ -171,9 +182,6 @@ return {
                 end,
                 desc = "Yazi (cwd)",
             },
-        },
-        opts = {
-            open_for_directories = true,
         },
     },
 }

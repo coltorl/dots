@@ -41,16 +41,24 @@ return {
     {
         "petertriho/nvim-scrollbar",
         config = function(_, opts)
+            opts.handle = {
+                color = "#303030",
+                blend = 15,
+            }
             opts.handlers = {
                 search = true,
-            }
-            opts.marks = {
-                Search = { color = "#e3c78a" },
+                cursor = false,
             }
             opts.hide_if_all_visible = true
             opts.show_in_active_only = true
             require("scrollbar").setup(opts)
         end,
+    },
+    {
+        "lukas-reineke/virt-column.nvim",
+        opts = {
+            virtcolumn = "101"
+        },
     },
     {
         "kevinhwang91/nvim-hlslens",

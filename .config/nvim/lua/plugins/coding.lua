@@ -53,7 +53,7 @@ return {
             dap.defaults.fallback.exception_breakpoints = {}
             dap.defaults.cpp.exception_breakpoints = {}
             dap.defaults.c.exception_breakpoints = {}
-            require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust", "c", "cpp" } })
+            --require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust", "c", "cpp" }, netcoredbg = {"cs"} })
         end,
     },
     {
@@ -154,11 +154,19 @@ return {
                 end
             end, { desc = "peek Fold" })
 
-            require("ufo").setup({
-                provider_selector = function(bufnr, filetype, buftype)
-                    return { "lsp", "indent" }
-                end,
-            })
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
+            local language_servers = require("lspconfig").util.available_servers()
+            for _, ls in ipairs(language_servers) do
+                require("lspconfig")[ls].setup({
+                    capabilities = capabilities,
+                    -- you can add other fields for setting up lsp server in this table
+                })
+            end
+            require("ufo").setup()
         end,
     },
     {
@@ -296,6 +304,13 @@ return {
                 desc = "Align CSV next col",
                 mode = "n",
             },
+        },
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            signs = false,
         },
     },
 }
