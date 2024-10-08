@@ -1,46 +1,5 @@
 return {
     {
-        "neovim/nvim-lspconfig",
-        opts = {
-            inlay_hints = { enabled = false },
-            servers = {
-                clangd = {
-                    keys = {
-                        { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-                    },
-                    root_dir = function(fname)
-                        return require("lspconfig.util").root_pattern(
-                            "Makefile",
-                            "configure.ac",
-                            "configure.in",
-                            "config.h.in",
-                            "meson.build",
-                            "meson_options.txt",
-                            "build.ninja",
-                            ".clang-format"
-                        )(fname) or require("lspconfig.util").root_pattern(
-                            "compile_commands.json",
-                            "compile_flags.txt"
-                        )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-                    end,
-                    cmd = {
-                        "clangd",
-                        "--all-scopes-completion",
-                        "--clang-tidy",
-                        "--header-insertion=iwyu",
-                        "--completion-style=detailed",
-                        "--fallback-style=llvm",
-                        "--function-arg-placeholders=false",
-                    },
-                    init_options = {
-                        completeUnimported = true,
-                        clangdFileStatus = true,
-                    },
-                },
-            },
-        },
-    },
-    {
         "mfussenegger/nvim-dap",
         optional = true,
         opts = function()
@@ -86,7 +45,7 @@ return {
                 "latex",
                 "glsl",
                 "http",
-                "llvm"
+                "llvm",
             },
         },
     },
@@ -95,13 +54,11 @@ return {
         opts = {
             ensure_installed = {
                 -- lsp
-                "clangd",
                 "json-lsp",
                 "lua-language-server",
-                "pyright",
+                "basedpyright",
                 "ruff-lsp",
                 "lemminx",
-                "codelldb",
                 "debugpy",
                 -- linter
                 "cmakelang",
