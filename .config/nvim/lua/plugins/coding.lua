@@ -117,6 +117,10 @@ return {
                 dynamicRegistration = false,
                 lineFoldingOnly = true,
             }
+
+            -- I am very lazy, this probably shouldn't be here but who cares
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+
             local language_servers = require("lspconfig").util.available_servers()
             for _, ls in ipairs(language_servers) do
                 require("lspconfig")[ls].setup({
