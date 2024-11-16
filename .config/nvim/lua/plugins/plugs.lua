@@ -109,8 +109,12 @@ return {
             return opts
         end,
     },
+    { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+    { "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
+    { "iguanacucumber/mag-buffer", name = "cmp-buffer" },
     {
-        "hrsh7th/cmp-cmdline",
+        "iguanacucumber/mag-cmdline",
+        name = "cmp-cmdline",
         after = "nvim-cmp", -- Ensure it loads after nvim-cmp
         config = function()
             local cmp = require("cmp")

@@ -6,13 +6,16 @@
     pager = delta
 
 [interactive]
-    diffFilter = delta --line-numbers --paging=never
+    diffFilter = delta
 
 [delta]
     navigate = true    # use n and N to move between diff sections
+    dark = true
+    line-numbers= true
+    line-numbers-left-format = ""
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
     colorMoved = default

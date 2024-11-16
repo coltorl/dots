@@ -4,6 +4,7 @@
 vim.g.lazyvim_python_lsp = "basedpyright"
 vim.opt.shiftwidth = 4 -- Size of an indent
 vim.opt.tabstop = 4
+vim.opt.colorcolumn = '101'
 vim.o.expandtab = true
 vim.opt.conceallevel = 0
 vim.opt.wrap = false

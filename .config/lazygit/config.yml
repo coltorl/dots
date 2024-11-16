@@ -1,4 +1,36 @@
+# Configuration documentation: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+disableStartupPopups: true
+
 git:
+  branchLogCmd: 'git log --graph --color=always --decorate --date=relative --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset) - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)" {{branchName}} --'
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: delta --dark --paging=never
+
+gui:
+  authorColors:
+    'Coltor Leichtman': blue
+    '*': magenta
+  showBottomLine: false
+  showCommandLog: false
+  showRandomTip: false
+  showPanelJumps: false
+  skipDiscardChangeWarning: false
+  border: single
+  statusPanelView: allBranchesLog
+  erdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    inactiveBorderColor:
+      - black
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - black
+
+notARepository: 'quit'
+
+promptToReturnFromSubprocess: false

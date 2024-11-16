@@ -55,12 +55,6 @@ return {
         end,
     },
     {
-        "lukas-reineke/virt-column.nvim",
-        opts = {
-            virtcolumn = "101"
-        },
-    },
-    {
         "kevinhwang91/nvim-hlslens",
         config = function()
             -- Setup hlslens
