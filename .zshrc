@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="avit"
 ZVM_INIT_MODE=sourcing
-plugins=(git sudo zsh-vi-mode zsh-syntax-highlighting ssh-agent)
+plugins=(git sudo zsh-vi-mode zsh-syntax-highlighting ssh-agent bd)
 zstyle :omz:plugins:ssh-agent identities gatech
 source $ZSH/oh-my-zsh.sh
 
@@ -19,13 +19,13 @@ alias vi="nvim"
 alias v="nvim"
 alias cat="bat"
 alias cd="z"
-alias fcd='cd $(fd --type d --hidden --exclude .npm --exclude .gnupg --exclude .local --exclude .thunderbird --exclude .rustup --exclude .git --exclude .cache --exclude .mozilla --exclude .config/discord --exclude .cargo | fzf)'
-alias vd='cd $(fd --type d --exclude .local --exclude .thunderbird --exclude .rustup --exclude .git --exclude .cache --exclude .mozilla --base-directory $HOME --search-path $HOME/dev --max-depth 1 | fzf) && vim .'
+alias fcd='zi'
+alias vd='zi && vim'
 alias open='xdg-open'
 alias c='clear'
 alias tree='exa -T'
 alias docker='podman'
-alias fman="compgen -c | fzf | xargs man"
+alias fman=""
 alias ls="exa -a"
 alias lg="lazygit"
 alias config='/usr/bin/git --git-dir=$HOME/dots.git/ --work-tree=$HOME'
