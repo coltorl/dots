@@ -40,19 +40,22 @@ return {
     },
     {
         "petertriho/nvim-scrollbar",
-        config = function(_, opts)
-            opts.handle = {
+        opts = {
+            handle = {
                 color = "#303030",
                 blend = 15,
-            }
-            opts.handlers = {
+            },
+            handlers = {
                 search = true,
                 cursor = false,
-            }
-            opts.hide_if_all_visible = true
-            opts.show_in_active_only = true
-            require("scrollbar").setup(opts)
-        end,
+            },
+            excluded_filetypes = {
+                "blink-cmp-menu",
+                "blink-cmp-documentation"
+            },
+            hide_if_all_visible = true,
+            show_in_active_only = true
+        },
     },
     {
         "kevinhwang91/nvim-hlslens",
@@ -131,5 +134,11 @@ return {
                 end)
             end
         end,
+    },
+    {
+        "snacks.nvim",
+        opts = {
+            scroll = { enabled = false },
+        },
     },
 }

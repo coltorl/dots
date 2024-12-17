@@ -4,7 +4,7 @@
 vim.g.lazyvim_python_lsp = "basedpyright"
 vim.opt.shiftwidth = 4 -- Size of an indent
 vim.opt.tabstop = 4
-vim.opt.colorcolumn = '101'
+vim.opt.colorcolumn = "101"
 vim.o.expandtab = true
 vim.opt.conceallevel = 0
 vim.opt.wrap = false
@@ -31,6 +31,7 @@ vim.filetype.add({ extension = { vertex = "glsl", frag = "glsl" } })
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "single",
 })
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
     border = "single",
 })
@@ -56,8 +57,27 @@ vim.opt.spell = true
 
 vim.o.smartcase = false
 vim.o.ignorecase = false
-vim.opt.background = 'dark'
+vim.opt.background = "dark"
 vim.o.autowrite = true
 vim.o.autowriteall = true
 
 vim.opt.swapfile = false -- sue me
+
+vim.wo.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
+vim.wo.foldcolumn = '1'
+vim.wo.foldenable = true
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldlevel = 99
+vim.wo.foldmethod = 'expr'
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client:supports_method("textDocument/foldingRange") then
+            vim.wo.foldmethod = "expr"
+            vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+        end
+    end,
+})
+
+vim.opt.completeopt = "menu,menuone,noselect"

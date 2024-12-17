@@ -21,6 +21,9 @@ return {
             cmake_executor = { name = "overseer", opts = {} },
             cmake_runner = { name = "overseer", opts = {} },
             cmake_virtual_text_support = false,
+            cmake_notifications = {
+                runner = { enabled = false },
+            },
         },
     },
     {
@@ -74,6 +77,16 @@ return {
         },
     },
     {
+        "neovim/nvim-lspconfig",
+        opts = {
+            setup = {
+                clangd = function(_, opts)
+                    opts.capabilities.offsetEncoding = { "utf-16" }
+                end,
+            },
+        },
+    },
+    {
         "mg979/vim-visual-multi",
         event = "VeryLazy",
         init = function()
@@ -93,47 +106,6 @@ return {
                 },
             },
         },
-    },
-    {
-        "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async" },
-        config = function()
-            vim.o.foldcolumn = "1"
-            vim.o.foldlevel = 99
-            vim.o.foldlevelstart = 99
-            vim.o.foldenable = true
-
-            vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
-            vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
-            vim.keymap.set("n", "zk", function()
-                local winid = require("ufo").peekFoldedLinesUnderCursor()
-                if not winid then
-                    vim.lsp.buf.hover()
-                end
-            end, { desc = "peek Fold" })
-
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.foldingRange = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true,
-            }
-
-            -- I am very lazy, this probably shouldn't be here but who cares
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-            local language_servers = require("lspconfig").util.available_servers()
-            for _, ls in ipairs(language_servers) do
-                require("lspconfig")[ls].setup({
-                    capabilities = capabilities,
-                    -- you can add other fields for setting up lsp server in this table
-                })
-            end
-            require("ufo").setup({
-                provider_selector = function(bufnr, filetype, buftype)
-                    return { "lsp", "indent" }
-                end,
-            })
-        end,
     },
     {
         "emmanueltouzery/decisive.nvim",
@@ -194,6 +166,28 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             signs = false,
+        },
+    },
+    {
+        "saghen/blink.cmp",
+        opts = {
+            keymap = {
+                ["<Tab>"] = { "select_next", "fallback" },
+                ["<S-Tab>"] = { "select_prev", "fallback" },
+            },
+            completion = {
+                list = { selection = "manual" },
+                menu = { scrollbar = false, border = "single" },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 0,
+                    window = {
+                        border = 'single',
+                        winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
+                        scrollbar = false
+                    }
+                },
+            },
         },
     },
 }
