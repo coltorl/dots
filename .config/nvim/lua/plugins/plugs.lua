@@ -21,36 +21,64 @@ return {
         keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
         config = true,
     },
+    -- {
+    --     "ibhagwan/fzf-lua",
+    --     opts = {
+    --         "max-perf",
+    --         fzf_opts = {
+    --             ["--no-multi"] = true,
+    --             ["--cycle"] = true,
+    --             ["--exact"] = true,
+    --         },
+    --         files = {
+    --             fzf_opts = {
+    --                 ["--ansi"] = true,
+    --             },
+    --             actions = {
+    --                 ["alt-i"] = { function() end },
+    --                 ["alt-h"] = { function() end },
+    --             },
+    --         },
+    --         grep = {
+    --             actions = {
+    --                 ["alt-i"] = { function() end },
+    --                 ["alt-h"] = { function() end },
+    --             },
+    --         },
+    --         keymap = {
+    --             fzf = {
+    --                 ["tab"] = "down",
+    --                 ["shift-tab"] = "up",
+    --                 ["ctrl-j"] = "preview-page-down",
+    --                 ["ctrl-k"] = "preview-page-up",
+    --             },
+    --         },
+    --     },
+    -- },
+    -- lazy.nvim
     {
-        "ibhagwan/fzf-lua",
+        "folke/snacks.nvim",
         opts = {
-            "max-perf",
-            fzf_opts = {
-                ["--no-multi"] = true,
-                ["--cycle"] = true,
-                ["--exact"] = true,
-            },
-            files = {
-                fzf_opts = {
-                    ["--ansi"] = true,
+            picker = {
+                win = {
+                    input = {
+                        keys = {
+                            ["<Esc>"] = { "close", mode = { "n", "i" } },
+                            ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+                            ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+                        },
+                    },
                 },
-                actions = {
-                    ["alt-i"] = { function() end },
-                    ["alt-h"] = { function() end },
+                list = {
+                    keys = {
+                        ["<Tab>"] = "list_down",
+                        ["<S-Tab>"] = "list_up",
+                    },
                 },
-            },
-            grep = {
-                actions = {
-                    ["alt-i"] = { function() end },
-                    ["alt-h"] = { function() end },
-                },
-            },
-            keymap = {
-                fzf = {
-                    ["tab"] = "down",
-                    ["shift-tab"] = "up",
-                    ["ctrl-j"] = "preview-page-down",
-                    ["ctrl-k"] = "preview-page-up",
+                icons = {
+                    files = {
+                        enabled = false,
+                    },
                 },
             },
         },

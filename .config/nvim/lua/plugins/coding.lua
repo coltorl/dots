@@ -176,16 +176,16 @@ return {
                 ["<S-Tab>"] = { "select_prev", "fallback" },
             },
             completion = {
-                list = { selection = "manual" },
+                list = { selection = { preselect = false, auto_insert = false } },
                 menu = { scrollbar = false, border = "single" },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 0,
                     window = {
-                        border = 'single',
-                        winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
-                        scrollbar = false
-                    }
+                        border = "single",
+                        winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+                        scrollbar = false,
+                    },
                 },
             },
         },
