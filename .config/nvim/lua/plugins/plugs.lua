@@ -57,6 +57,18 @@ return {
     -- },
     -- lazy.nvim
     {
+        "folke/which-key.nvim",
+        opts = {
+            preset = "modern",
+            win = {
+                border = "double",
+                wo = {
+                    winblend = 0,
+                },
+            },
+        },
+    },
+    {
         "folke/snacks.nvim",
         opts = {
             picker = {

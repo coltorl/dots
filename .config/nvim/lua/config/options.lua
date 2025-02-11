@@ -81,3 +81,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.numberwidth = 3
+vim.opt.signcolumn = "yes:1"
+vim.opt.statuscolumn = " %l %s"
+

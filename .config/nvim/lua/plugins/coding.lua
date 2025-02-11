@@ -79,6 +79,22 @@ return {
     {
         "neovim/nvim-lspconfig",
         opts = {
+            diagnostics = {
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                    },
+                    numhl = {
+                        [vim.diagnostic.severity.WARN] = "WarningMsg",
+                        [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+                        [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+                        [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+                    },
+                },
+            },
             setup = {
                 clangd = function(_, opts)
                     opts.capabilities.offsetEncoding = { "utf-16" }
@@ -177,7 +193,10 @@ return {
             },
             completion = {
                 list = { selection = { preselect = false, auto_insert = false } },
-                menu = { scrollbar = false, border = "single" },
+                menu = {
+                    scrollbar = false,
+                    border = "single",
+                },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 0,
@@ -187,6 +206,20 @@ return {
                         scrollbar = false,
                     },
                 },
+            },
+            sources = {
+                cmdline = function()
+                    local type = vim.fn.getcmdtype()
+                    -- Search forward and backward
+                    if type == "/" or type == "?" then
+                        return { "buffer" }
+                    end
+                    -- Commands
+                    if type == ":" or type == "@" then
+                        return { "cmdline" }
+                    end
+                    return {}
+                end,
             },
         },
     },
