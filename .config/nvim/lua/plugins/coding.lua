@@ -192,7 +192,15 @@ return {
                 ["<S-Tab>"] = { "select_prev", "fallback" },
             },
             completion = {
-                list = { selection = { preselect = false, auto_insert = false } },
+                list = {
+                    selection = {
+                        preselect = function()
+                            local type = vim.fn.getcmdtype()
+                            return type == "/" or type == "?"  or type == ":" or type =="@"
+                        end,
+                        auto_insert = false
+                    },
+                },
                 menu = {
                     scrollbar = false,
                     border = "single",
@@ -207,8 +215,9 @@ return {
                     },
                 },
             },
-            sources = {
-                cmdline = function()
+            cmdline = {
+                enabled = true,
+                sources = function()
                     local type = vim.fn.getcmdtype()
                     -- Search forward and backward
                     if type == "/" or type == "?" then
@@ -220,6 +229,11 @@ return {
                     end
                     return {}
                 end,
+                keymap = {
+                    ["<Tab>"] = { "select_next", "fallback" },
+                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                    ["<CR>"] = { "accept_and_enter", "fallback" },
+                },
             },
         },
     },
